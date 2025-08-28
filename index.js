@@ -70,5 +70,14 @@ app.put('/todo/:id' , (req , res) =>{
 })
 //delete a todo item by its id 
 app.delete('/todo/:id' , (req , res) =>{
-
+     const id = parseInt(req.params.id) ;
+        const index = todoList.findIndex(item => item.id === id) ;
+        if(index === -1){
+            res.status(404).json({message : 'No such id exists'}) ;
+        }
+        else{
+            todoList.splice(index , 1) ;
+            res.status(200).json({message : 'Todo item deleted successfully'}) ;
+        }
+    
 })
